@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   web:
-    image: anaslinux/flask-app:latest
+    image: daniyalahmed2003/flask-app:latest
     ports:
       - "5000:5000"
     environment:
