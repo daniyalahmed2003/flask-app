@@ -1,23 +1,24 @@
 pipeline {
     agent any;
-    
     stages {
         stage("Code") {
             steps {
-            git url: 'https://github.com/yo-its-anas/flask-app.git', branch: 'main'
+                git url:'https://github.com/daniyalahmed2003/flask-app.git', branch:'main' 
+                echo "Code cloned sucessfully..."
             }
         }
         stage("Build") {
             steps {
-            sh 'docker build -t flask-app .'
+                sh 'docker build -t flask-app .'
+                echo "Code Build successfully..."
             }
         }
         stage("Test") {
             steps {
-            echo "Test stage done..."
+                echo "Test Cases Successful..."
             }
         }
-        stage("Push to Docker Hub") {
+        stage("Push to DockerHub") {
             steps {
                 withCredentials([usernamePassword(
                     credentialsId:'dockerHubCreds',
@@ -30,10 +31,10 @@ pipeline {
             }
         }
         stage("Deployment") {
-            steps { 
-            sh "docker-compose down"    
-            sh "docker-compose up --build -d"
-                
+            steps {
+                sh 'docker-compose down'
+                sh 'docker-compose up -d'
+                echo "Code deployed successfully..."
             }
         }
     }
